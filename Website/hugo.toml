@@ -1,0 +1,173 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Successful Practices with your Angular & .NET Stack'
+theme = "relearn"
+
+
+
+# [outputs]
+# home = [ "HTML", "RSS", "SEARCH"]
+
+[mediaTypes]
+  [mediaTypes."text/javascript"]
+    suffixes = ["js"]
+
+[outputFormats.SEARCH]
+    name= "SEARCH"
+    baseName = "index.search"
+    isPlainText = true
+    mediaType = 'text/javascript'
+    permalinkable = false
+    noUgly = true
+
+
+  [outputFormats.SEARCHPAGE]
+    name= "SEARCHPAGE"
+    baseName = "search"
+    isHTML = true
+    mediaType = 'text/html'
+    permalinkable = false
+    noUgly = true
+
+[params.relearn.dependencies]
+  [params.relearn.dependencies.mathjax]
+    name = "MathJax"
+    location = "footer"
+  [params.relearn.dependencies.mermaid]
+    name = "Mermaid"
+    location = "footer"
+  [params.relearn.dependencies.openapi]
+    name = "OpenApi"
+    location = "footer"
+
+
+
+
+# the site's title of this showcase; you should change this ;-)
+title = "Building Cloud-Ready Applications in .NET"
+
+[params]
+  themeVariant = [ "neon", "relearn-light", "relearn-dark" ]
+  showVisitedLinks = true
+  disableLandingPageButton = true
+
+[outputs]
+  # add JSON to the home to support Lunr search; This is a mandatory setting
+  # for the search functionality
+  # add PRINT to home, section and page to activate the feature to print whole
+  # chapters
+  home = ["HTML", "RSS", "PRINT", "SEARCH", "SEARCHPAGE"]
+  section = ["HTML", "RSS", "PRINT"]
+  page = ["HTML", "RSS", "PRINT"]
+
+[markup]
+  [markup.highlight]
+    # line numbers in a table layout will shift if code is wrapping, so better
+    # not use it; visually both layouts have the same look and behavior
+    lineNumbersInTable = false
+
+    # the shipped variants come with their own modified chroma syntax highlightning
+    # stylesheets which are linked in your generated HTML pages; you can use Hugo to generate
+    # own stylesheets to your liking and use them in your variant;
+    # if you want to use Hugo's internal styles instead of the shipped stylesheets:
+    # - remove `noClasses` or set `noClasses = true`
+    # - set `style` to a predefined style name
+    # note: with using the internal styles, the `--CODE-theme` setting in your variant
+    # stylesheet will be ignored and the internal style is used for all variants and
+    # even print
+    noClasses = false
+    # style = "tango"
+
+  [markup.goldmark.renderer]
+    # activated for this showcase to use HTML and JavaScript; decide on your own needs;
+    # if in doubt, remove this line
+    unsafe = true
+
+# allows `hugo server` to display this showcase in IE11; this is used for testing, as we
+# are still supporting IE11 - although with degraded experience; if you don't care about
+# `hugo server` or browsers of ancient times, fell free to remove this whole block
+[server]
+  [[server.headers]]
+    for = "**.html"
+    [server.headers.values]
+       X-UA-Compatible = "IE=edge"
+
+# showcase of the menu shortcuts; you can use relative URLs linking
+# to your content or use fully-quallified URLs to link outside of
+# your project
+[languages]
+  [languages.en]
+    title = "Successful Practices with your Angular & .NET Stack"
+    weight = 1
+    languageName = "English"
+    # Language dependend settings:
+    # Use case https://gohugo.io/content-management/multilingual/#translation-by-content-directory
+    #contentDir = "content/en"
+    [languages.en.params]
+      landingPageName = "<i class='fas fa-home'></i> Home"
+
+  [[languages.en.menu.shortcuts]]
+    name = "<i class='fab fa-fw fa-github'></i> GitHub repo"
+    identifier = "ds"
+    url = "https://github.com/orgs/CloudReadyDotNetWorkshop"
+    weight = 10
+
+
+# mounts are only needed in this showcase to access the publicly available screenshots;
+# remove this section if you don't need further mounts
+[module]
+  [[module.mounts]]
+    source = 'archetypes'
+    target = 'archetypes'
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+
+  # Language dependend settings:
+  # Use case https://gohugo.io/content-management/multilingual/#translation-by-filename
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+  # Use case https://gohugo.io/content-management/multilingual/#translation-by-content-directory
+  #[[module.mounts]]
+  #  lang = 'en'
+  #  source = 'content/en'
+  #  target = 'content'
+  #[[module.mounts]]
+  #  lang = 'pir'
+  #  source = 'content/pir'
+  #  target = 'content'
+
+  [[module.mounts]]
+    source = 'data'
+    target = 'data'
+  [[module.mounts]]
+    source = 'i18n'
+    target = 'i18n'
+  # just for this documentation to expose the GitHub hero image in the docs
+  [[module.mounts]]
+    source = '../images'
+    target = 'static/images'
+  [[module.mounts]]
+    source = 'static/images'
+    target = 'static/images'
+  [[module.mounts]]
+    source = 'layouts'
+    target = 'layouts'
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
+  # just for this documentation to expose our config in the docs
+  [[module.mounts]]
+    source = 'config'
+    target = 'static/config'
+
+# [params]
+#   # Demo setting for displaying the siteparam shortcode the docs.
+#   siteparam.test.text = "A **nested** option <b>with</b> formatting"
+#   # Extension to the image effects only for the docs.
+#   imageEffects.bg-white = true
+
+
+
+
