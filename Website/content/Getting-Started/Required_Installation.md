@@ -3,7 +3,7 @@ title: "Required Installation"
 date: 2024-01-05T16:36:46Z
 draft: false
 weight: 1
-chapter: 2.1
+chapter: 1.1
 ---
 
 ## Required installations

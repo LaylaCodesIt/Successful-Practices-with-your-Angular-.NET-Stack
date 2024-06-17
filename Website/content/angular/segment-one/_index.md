@@ -1,7 +1,7 @@
 +++
 archetype = "chapter"
-title = "TITLE"
-weight = 2
+title = "ONE"
+weight = 1
 chapter= 3.2
 +++
 
