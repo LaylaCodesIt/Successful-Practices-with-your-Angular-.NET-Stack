@@ -1,5 +1,6 @@
 
 using System.Text.Json;
+using TourOfPonies.Api;
 using TourOfPonies.Api.Data;
 using TourOfPonies.Api.Endpoints;
 using TourOfPonies.Api.Models;
@@ -13,7 +14,7 @@ builder.Configuration
 	.AddCommandLine(args)
 	.Build();
 
-builder.Services.AddLogging();
+
 
 var configSection = builder.Configuration.GetSection("StorageSettings");
 var storageSettings = new StorageSettings();
@@ -21,9 +22,11 @@ configSection.Bind(storageSettings);
 
 builder.Services.AddSingleton<StorageSettings>(storageSettings);
 
-builder.Services.AddScoped<TableStorageContext>();
-builder.Services.AddScoped<TableStorageSeed>();
-builder.Services.AddScoped<PonyService>();
+builder.Services.AddLogging();
+
+builder.Services.AddDependencies();
+
+
 builder.Services.AddCors(options =>
 {
 	options.AddDefaultPolicy(
@@ -32,7 +35,7 @@ builder.Services.AddCors(options =>
 						  builder.AllowAnyOrigin()
 						   .AllowAnyMethod()
 						   .AllowAnyHeader();
-						 
+
 					  });
 });
 

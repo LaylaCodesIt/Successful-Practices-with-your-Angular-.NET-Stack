@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TourOfPonies.Api.Data;
+﻿using TourOfPonies.Api.Data;
 using TourOfPonies.Api.Models;
 
 namespace TourOfPonies.Api.Endpoints;
@@ -17,29 +16,29 @@ public static class PonyEndpoints
 	{
 		// get all ponies
 		app.MapGet("/ponies", async (PonyService ponyService, HttpContext context) =>
+		{
+			if (context.Request.Query.TryGetValue("name", out var nameValues))
 			{
-				if (context.Request.Query.TryGetValue("name", out var nameValues))
+				var name = nameValues.FirstOrDefault();
+				if (string.IsNullOrEmpty(name))
 				{
-					var name = nameValues.FirstOrDefault();
-					if(string.IsNullOrEmpty(name))
+					var pony = await ponyService.GetByPartialName(name);
+
+					if (pony is null)
 					{
-						var pony = await ponyService.GetByPartialName(name);
-
-						if (pony is null)
-						{
-							context.Response.StatusCode = StatusCodes.Status404NotFound;
-							return;
-						}
-
-						context.Response.StatusCode = StatusCodes.Status200OK;
-						await context.Response.WriteAsJsonAsync(pony);
+						context.Response.StatusCode = StatusCodes.Status404NotFound;
 						return;
 					}
-				}
 
-				context.Response.StatusCode = StatusCodes.Status200OK;
-				await context.Response.WriteAsJsonAsync(await ponyService.GetAll());
-			})
+					context.Response.StatusCode = StatusCodes.Status200OK;
+					await context.Response.WriteAsJsonAsync(pony);
+					return;
+				}
+			}
+
+			context.Response.StatusCode = StatusCodes.Status200OK;
+			await context.Response.WriteAsJsonAsync(await ponyService.GetAll());
+		})
 		.WithOpenApi();
 
 		app.MapGet("/ponies/{id}", async (PonyService ponyService, string id, HttpContext context) =>
@@ -86,11 +85,6 @@ public static class PonyEndpoints
 
 		app.MapGet("/ponies/name={name}", async (PonyService ponyService, HttpContext context, string name) =>
 		{
-
-			//if (context.Request.Query.TryGetValue("name", out var nameValues))
-			//{
-			//	name = nameValues.FirstOrDefault();
-			//}
 			if (string.IsNullOrEmpty(name))
 			{
 				context.Response.StatusCode = StatusCodes.Status400BadRequest;
@@ -143,7 +137,7 @@ public static class PonyEndpoints
 				return;
 			}
 
-			
+
 			bool isSuccessful = await ponyService.DeletePony(id);
 
 			context.Response.StatusCode = isSuccessful ? StatusCodes.Status204NoContent : StatusCodes.Status500InternalServerError;
