@@ -6,7 +6,8 @@ weight: 1006
 type: "subpost"
 ---
 
-![Screenshot of Laylas Twitter status regarding CORS](cors.png)
+![Screenshot of Laylas Twitter status regarding CORS](/dotnet/code/cors.png)
+
 <iframe src="https://giphy.com/embed/sIE0hveuiwCNG" width="960" height="538" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/angry-rage-anger-sIE0hveuiwCNG">via GIPHY</a></p>
 
 Using Swagger or the browser, we can easily explore our API. However, if we want to use the API with another app, say an Angular app, we will need to add support for CORS.
