@@ -70,8 +70,8 @@ internal class PonyService
 	// add/update pony
 	public async Task<string> AddOrUpdatePony(Pony pony)
 	{
-		var ponyEntity = await _tableStorageContext.InsertOrMergeEntityAsync(new PonyEntity(pony));
-		return ponyEntity.rowKey;
+		var entityId = await _tableStorageContext.InsertOrMergeEntityAsync(new PonyEntity(pony));
+		return entityId;
 	}
 
 	//delete pony

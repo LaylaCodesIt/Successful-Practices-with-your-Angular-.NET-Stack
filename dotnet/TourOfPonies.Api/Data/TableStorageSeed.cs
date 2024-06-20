@@ -23,7 +23,7 @@ internal class TableStorageSeed
     {
         public List<Pony> Ponies { get; set; }
     }
-    internal async Task<bool> Seed()
+    internal async Task Seed()
     {
         bool isSuccessful = false;
         var jsonOptions = new JsonSerializerOptions
@@ -44,14 +44,12 @@ internal class TableStorageSeed
 				if (!string.IsNullOrEmpty(pny.LargeAvatar))
                     pony.IsHero = true;
 
-                var response = await _context.InsertOrMergeEntityAsync(pony);
-                isSuccessful = response.responseSuccess;
-                _log.LogInformation($"Pony {pny.Name} was successful: {isSuccessful}");
+                var ponyId = await _context.InsertOrMergeEntityAsync(pony);
+                _log.LogInformation($"Pony {pny.Name} with ID: {ponyId} was created");
             }
         }
 
-        return isSuccessful;
-    }
+            }
 
     
 }
