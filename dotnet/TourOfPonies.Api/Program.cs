@@ -58,7 +58,7 @@ app.UseCors();
 
 app.MapPatch("/seed", async (TableStorageSeed seed) =>
 {
-	return await seed.Seed();
+	await seed.Seed();
 });
 
 app.AddPoniesEndpoints();
