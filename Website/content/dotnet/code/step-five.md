@@ -14,14 +14,22 @@ In the `UnsafeMethods` method, add the following:
 
 ```csharp
 app.MapPost("/ponies", async (PonyService ponyService, Pony pony, HttpContext context) =>
-{
+{	
 	if (pony is null)
 	{
 		context.Response.StatusCode = StatusCodes.Status400BadRequest;
 		return;
 	}
+	string ponyId = await ponyService.AddOrUpdatePony(pony);
+
+	if (string.IsNullOrEmpty(ponyId))
+	{
+		context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+		return;
+	}
+
 	context.Response.StatusCode = StatusCodes.Status200OK;
-	await context.Response.WriteAsJsonAsync(await ponyService.AddOrUpdatePony(pony));
+	await context.Response.WriteAsJsonAsync(new {id = ponyId});
 });
 ```
 
