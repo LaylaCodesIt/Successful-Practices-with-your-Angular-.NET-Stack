@@ -71,7 +71,7 @@ This hasn't done anything yet, other than to create the endpoint. We now need to
 ```csharp
 app.MapPatch("/seed", async (TableStorageSeed seed) =>
 {
-	return await seed.Seed();
+	await seed.Seed();
 });
 ```
 
