@@ -63,10 +63,6 @@ internal class PonyService
 	{
 		List<Pony> ponies = await GetAll();
 
-		//return ponies.Where(Pony => Pony.Name.ToLower().Contains(partialName.ToLower()))
-		//		.Select(Pony => Pony.Name)
-		//		.FirstOrDefault() ?? string.Empty;
-
 		return ponies.Where(Pony => Pony.Name.ToLower().Contains(partialName.ToLower()))
 				.ToList() ?? new List<Pony>();
 	}
@@ -74,8 +70,8 @@ internal class PonyService
 	// add/update pony
 	public async Task<string> AddOrUpdatePony(Pony pony)
 	{
-		var ponyEntity = await _tableStorageContext.InsertOrMergeEntityAsync(new PonyEntity(pony));
-		return ponyEntity.rowKey;
+		var entityId = await _tableStorageContext.InsertOrMergeEntityAsync(new PonyEntity(pony));
+		return entityId;
 	}
 
 	//delete pony
@@ -84,8 +80,5 @@ internal class PonyService
 	{
 		return await _tableStorageContext.DeletePonyAsync(id);
 	}
-
-
-
 
 }

@@ -52,10 +52,10 @@ internal class TableStorageContext
         }
     }
     
-    public async Task<(bool responseSuccess, string rowKey)> InsertOrMergeEntityAsync(PonyEntity entity)
+    public async Task<string> InsertOrMergeEntityAsync(PonyEntity entity)
     {
         bool responseSuccess = false;
-        string newRowKey = string.Empty;
+        string newRowKey = null;
         try
         {
             if (_table is null)
@@ -66,7 +66,7 @@ internal class TableStorageContext
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-			entity.RowKey = entity.RowKey ?? Guid.NewGuid().ToString();
+			entity.RowKey = string.IsNullOrEmpty(entity.RowKey) ? Guid.NewGuid().ToString() : entity.RowKey;
 			entity.PartitionKey = _partitionKey;
 
             var response = await _tableClient.UpsertEntityAsync(entity);
@@ -92,7 +92,7 @@ internal class TableStorageContext
             responseSuccess = false;
     
         }
-        return (responseSuccess, newRowKey);
+        return newRowKey;
     }
 
     public async Task<PonyEntity> GetPonyByNameAsync(string name)
