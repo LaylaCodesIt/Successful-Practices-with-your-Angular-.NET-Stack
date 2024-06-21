@@ -24,16 +24,16 @@ internal class Pony
 		Images = pe.Images.Split(", ").ToList();
 		IsHero = pe.IsHero;
 	}
-    public string Id { get; set; }
-	public string Name { get; set; }
-	public string LargeAvatar { get; set; }
-	public string Alias { get; set; }
-	public string Url { get; set; }
-	public string Sex { get; set; }
-	public string Residence { get; set; }
-	public string Occupation { get; set; }
-	public List<string> Kind { get; set; }
-	public List<string> Images { get; set; }
-	public bool IsHero { get; set; }
+    public string? Id { get; set; }
+	public string Name { get; set; } = "";
+	public string? LargeAvatar { get; set; }
+	public string? Alias { get; set; }
+	public string? Url { get; set; }
+	public string? Sex { get; set; }
+	public string? Residence { get; set; }
+	public string? Occupation { get; set; }
+	public List<string> Kind { get; set; } = [];
+	public List<string> Images { get; set; } = [];
+	public bool IsHero { get; set; } = false;
 
 }

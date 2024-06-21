@@ -13,7 +13,7 @@ internal class PonyEntity : ITableEntity
 
     public PonyEntity(Pony pny)
     {
-        RowKey = pny.Id.ToString();
+        RowKey = pny.Id?.ToString();
         Name = pny.Name;
         Alias = pny.Alias;
         LargeAvatar = pny.LargeAvatar;
@@ -26,20 +26,20 @@ internal class PonyEntity : ITableEntity
         IsHero = pny.IsHero;
     }
 
-    public string PartitionKey { get; set; }
-    public string RowKey { get; set; }
+    public string? PartitionKey { get; set; }
+    public string? RowKey { get; set; }
     public DateTimeOffset? Timestamp { get; set; }
     public ETag ETag { get; set; }
 
-    public string Name { get; set; }
-    public string LargeAvatar { get; set; }
-    public string Alias { get; set; }
-    public string Url { get; set; }
-    public string Sex { get; set; }
-    public string Residence { get; set; }
-    public string Occupation { get; set; }
-    public string Kind { get; set; }
-    public string Images { get; set; }
-    public bool IsHero { get; set; }
+    public string Name { get; set; } = "";
+    public string? LargeAvatar { get; set; }
+    public string? Alias { get; set; }
+    public string? Url { get; set; }
+    public string? Sex { get; set; }
+    public string? Residence { get; set; }
+    public string? Occupation { get; set; }
+    public string? Kind { get; set; }
+    public string? Images { get; set; }
+    public bool IsHero { get; set; } = false;
 
 }
