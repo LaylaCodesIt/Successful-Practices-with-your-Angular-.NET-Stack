@@ -13,7 +13,7 @@ internal class PonyEntity : ITableEntity
 
     public PonyEntity(Pony pny)
     {
-        RowKey = pny.Id.ToString();
+        RowKey = pny.Id?.ToString();
         Name = pny.Name;
         Alias = pny.Alias;
         LargeAvatar = pny.LargeAvatar;
@@ -21,10 +21,12 @@ internal class PonyEntity : ITableEntity
         Sex = pny.Sex;
         Residence = pny.Residence;
         Occupation = pny.Occupation;
-        Kind = string.Join(", ", pny.Kind);
-        Images = string.Join(", ", pny.Images);
+        Kind = pny.Kind is not null ? ( pny.Kind.Count > 0 ? string.Join(", ", pny.Kind) : pny.Kind.First()) : "";
+        Images =pny.Images is not null ?( pny.Images.Count > 0 ? string.Join(", ", pny.Images) : pny.Images.First()): "";
         IsHero = pny.IsHero;
     }
+
+
 
     public string PartitionKey { get; set; }
     public string RowKey { get; set; }
