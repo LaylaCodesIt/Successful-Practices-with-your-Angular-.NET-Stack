@@ -12,7 +12,7 @@ internal class Pony
 	}
     public Pony(PonyEntity pe)
     {
-		Id = pe.RowKey;
+		Id = string.IsNullOrEmpty(pe.RowKey) ? "" : pe.RowKey;
 		Name = pe.Name;
 		LargeAvatar = pe.LargeAvatar;
 		Alias = pe.Alias;
@@ -32,8 +32,8 @@ internal class Pony
 	public string Sex { get; set; }
 	public string Residence { get; set; }
 	public string Occupation { get; set; }
-	public List<string> Kind { get; set; }
-	public List<string> Images { get; set; }
+	public List<string> Kind { get; set; } = new();
+	public List<string> Images { get; set; } = new();
 	public bool IsHero { get; set; }
 
 }
