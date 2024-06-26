@@ -20,7 +20,7 @@ public static class PonyEndpoints
 			if (context.Request.Query.TryGetValue("name", out var nameValues))
 			{
 				var name = nameValues.FirstOrDefault();
-				if (string.IsNullOrEmpty(name))
+				if (!string.IsNullOrEmpty(name))
 				{
 					var pony = await ponyService.GetByPartialName(name);
 
@@ -64,7 +64,7 @@ public static class PonyEndpoints
 
 		app.MapGet("/ponies/{id}/avatar", async (PonyService ponyService, string id, HttpContext context) =>
 		{
-			if (string.IsNullOrEmpty(id))
+			if (!string.IsNullOrEmpty(id))
 			{
 				context.Response.StatusCode = StatusCodes.Status400BadRequest;
 				return;
