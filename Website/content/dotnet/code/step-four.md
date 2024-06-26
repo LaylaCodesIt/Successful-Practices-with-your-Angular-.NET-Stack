@@ -10,7 +10,7 @@ If you didn't get to the challenge in step three, don't fret - we'll do it now.
 
 Either in the root of the application, or a directory called `Endpoints` add a new file called `PonyEndpoints.cs`.
 
-Then update the file to havve an extension method for `WebApplication` like so:
+Then update the file to have an extension method for `WebApplication` like so:
 
 ```csharp
 using TourOfPonies.Api.Data;
@@ -97,7 +97,7 @@ Let's now write a `GET` request to get a pony by ID.
 ```csharp
 	app.MapGet("/ponies/{id}", async (PonyService ponyService, string id, HttpContext context) =>
 {
-	if (string.IsNullOrEmpty(id))
+	if (!string.IsNullOrEmpty(id))
 	{
 		context.Response.StatusCode = StatusCodes.Status400BadRequest;
 		return;
@@ -136,7 +136,7 @@ app.MapGet("/ponies", async (PonyService ponyService, HttpContext context) =>
 		if (context.Request.Query.TryGetValue("name", out var nameValues))
 		{
 			var name = nameValues.FirstOrDefault();
-			if(string.IsNullOrEmpty(name))
+			if(!string.IsNullOrEmpty(name))
 			{
 				var pony = await ponyService.GetByPartialName(name);
 
